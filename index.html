@@ -3,42 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Нажми для звука</title>
+    <title>Звук по кнопке</title>
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        * {
             margin: 0;
-            background-color: #f0f0f0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        button {
+        body, html {
             width: 100%;
             height: 100%;
-            font-size: 3rem;
-            border: none;
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
         }
-        button:hover {
-            background-color: #0056b3;
+        button {
+            width: 100vw;
+            height: 100vh;
+            background: black;
+            border: none;
+            cursor: pointer;
+            font-size: 0; /* Полностью скрывает текст */
         }
     </style>
 </head>
 <body>
-    <button id="playButton">Нажми для воспроизведения</button>
-
-    <audio id="audio">
-        <source src="pztsr.mp3" type="audio/mpeg">
-        Ваш браузер не поддерживает аудио.
-    </audio>
-
+    <button id="playButton"></button>
+    <audio id="sound" src="pztsr.mp3"></audio>
+    
     <script>
-        document.getElementById("playButton").addEventListener("click", function () {
-            let audio = document.getElementById("audio");
+        document.getElementById("playButton").addEventListener("click", function() {
+            const audio = document.getElementById("sound");
+            audio.volume = 1.0; // Максимальная громкость
             audio.play();
+            
+            // Попытка перевести сайт в полноэкранный режим
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari и Opera
+                document.documentElement.webkitRequestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+                document.documentElement.msRequestFullscreen();
+            }
         });
     </script>
 </body>
